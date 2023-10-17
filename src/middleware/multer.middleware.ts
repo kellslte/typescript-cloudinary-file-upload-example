@@ -18,12 +18,12 @@ function runMiddleware(req: Request, res: Response, fn: any) {
 
 export const handler = async (req: Request, res: Response) => {
     try {
-        await runMiddleware(req, res, myUploadMiddleware);
-        const cldRes = await handleUpload(req.file.path);
-        res.json(cldRes);
-        console.log(cldRes, 'uploaded successfully');
-
-    } catch (error) {
+      await runMiddleware(req, res, myUploadMiddleware);
+      // @ts-ignore
+      const cldRes = await handleUpload(req.file?.path);
+      res.json(cldRes);
+      console.log("uploaded successfully");
+    } catch (error: any) {
         console.log(error, 'there is a problem');
         res.send({ message: error.message })
     }
